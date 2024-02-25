@@ -1,4 +1,4 @@
-package com.featurevotes.featurevotes;
+package com.featurevotes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

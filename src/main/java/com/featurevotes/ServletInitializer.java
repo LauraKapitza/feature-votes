@@ -1,4 +1,4 @@
-package com.featurevotes.featurevotes;
+package com.featurevotes;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
