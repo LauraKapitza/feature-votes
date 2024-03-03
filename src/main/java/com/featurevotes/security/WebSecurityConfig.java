@@ -13,13 +13,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/dashboard").hasAuthority("USER")
+                        .anyRequest().hasRole("USER")
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/dashboard", true)
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
@@ -38,4 +41,6 @@ public class WebSecurityConfig {
 
         return new InMemoryUserDetailsManager(user);
     }
+
+
 }
