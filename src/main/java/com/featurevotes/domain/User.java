@@ -2,17 +2,21 @@ package com.featurevotes.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
     private String name;
+    private Set<Authority> authorities = new HashSet<>();
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -45,6 +49,11 @@ public class User {
         this.name = name;
     }
 
-
-
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }
