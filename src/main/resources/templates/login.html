@@ -2,6 +2,18 @@
 <html xmlns:th="http://thymeleaf.org">
     <head>
         <title>Feature Votes Login</title>
+        <script
+                src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+                integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+                crossorigin="anonymous">
+        </script>
+        <script type="text/javascript">
+            $(function() {
+                $("#createAccount").click(function() {
+                    window.location.href = "/register";
+                })
+            });
+        </script>
     </head>
     <body>
         <form action="" method="post">
@@ -31,6 +43,7 @@
                 </p>
                 <div>
                     <button type="submit" class="btn">Log in</button>
+                    <button type="button" class="btn" id="createAccount">Create Account</button>
                 </div>
             </fieldset>
         </form>
