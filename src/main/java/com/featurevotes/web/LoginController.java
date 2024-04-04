@@ -1,7 +1,11 @@
 package com.featurevotes.web;
 
+import com.featurevotes.domain.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
@@ -11,7 +15,14 @@ public class LoginController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(ModelMap model) {
+        model.put("user", new User());
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String createAccount(User user) {
+        System.out.println(user.toString());
+        return "redirect:/login";
     }
 }
