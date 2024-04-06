@@ -1,7 +1,8 @@
-package com.featurevotes.security;
+package com.featurevotes.service;
 
 import com.featurevotes.domain.User;
 import com.featurevotes.repository.UserRepository;
+import com.featurevotes.security.CustomSecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +17,6 @@ public class CustomUserDetailsService extends User implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        System.out.println(user);
 
         if (user == null)
             throw new UsernameNotFoundException("Invalid Username and password");
