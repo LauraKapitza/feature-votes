@@ -2,18 +2,20 @@ package com.featurevotes.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
 
     private int id;
     private String username;
     private String password;
     private String name;
     private Set<Authority> authorities = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -66,5 +68,14 @@ public class User {
                 ", name='" + name + '\'' +
                 ", authorities=" + authorities +
                 '}';
+    }
+
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

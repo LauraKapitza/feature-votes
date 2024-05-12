@@ -2,15 +2,18 @@ package com.featurevotes.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="features")
-public class Feature {
+public class Feature implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String title;
     private String description;
     private String status;
+    private Product product;
 
     public int getId() {
         return id;
@@ -42,5 +45,14 @@ public class Feature {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @ManyToOne
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
