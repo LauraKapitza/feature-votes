@@ -10,15 +10,18 @@ import java.util.Set;
 @Table(name="users")
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
     private String name;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
     private Set<Authority> authorities = new HashSet<>();
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
     private Set<Product> products = new HashSet<>();
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+
     public int getId() {
         return id;
     }
@@ -51,7 +54,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
+
     public Set<Authority> getAuthorities() {
         return authorities;
     }
@@ -70,7 +73,7 @@ public class User implements Serializable {
                 '}';
     }
 
-    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
+
     public Set<Product> getProducts() {
         return products;
     }

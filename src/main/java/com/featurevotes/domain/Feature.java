@@ -13,6 +13,7 @@ public class Feature implements Serializable {
     private String title;
     private String description;
     private String status;
+    @ManyToOne
     private Product product;
 
     public int getId() {
@@ -47,7 +48,7 @@ public class Feature implements Serializable {
         this.status = status;
     }
 
-    @ManyToOne
+
     public Product getProduct() {
         return product;
     }

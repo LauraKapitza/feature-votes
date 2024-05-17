@@ -13,7 +13,9 @@ public class Product implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String name;
+    @ManyToOne
     private User user;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="product")
     private Set<Feature> features = new HashSet<>();
     private Boolean published;
 
@@ -33,7 +35,6 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    @ManyToOne
     public User getUser() {
         return user;
     }
@@ -42,7 +43,6 @@ public class Product implements Serializable {
         this.user = user;
     }
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="product")
     public Set<Feature> getFeatures() {
         return features;
     }
