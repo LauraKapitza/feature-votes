@@ -51,4 +51,13 @@ public class ProductController {
 
         return "redirect:/products/" + savedProduct.getId();
     }
+
+    @PostMapping("/products/{productId}")
+    public String saveProduct(@PathVariable int productId, Product product, @AuthenticationPrincipal User user) {
+        if (productId == product.getId()) {
+            product.setUser(user);
+            productRepository.save(product);
+        }
+        return "redirect:/products/" + productId;
+    }
 }
